@@ -3,8 +3,8 @@
 // (방법: "스토리업로드방법.md" 참고 / anon key 는 공개되어도 안전합니다 — RLS 로 보호)
 
 window.KRS_CONFIG = {
-  SUPABASE_URL: "https://YOUR-PROJECT.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR-ANON-PUBLIC-KEY",
+  SUPABASE_URL: "https://mdvjbbnrisiddaxrgvme.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kdmpiYm5yaXNpZGRheHJndm1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwODIwNDgsImV4cCI6MjA5NTY1ODA0OH0.lmaSmLIO31PouGxsQfRXVHYNUEiEdiLcuqk6dq4Fi2c",
 
   // ----- 네이버 카페 최신글 (선택) -----
   // 카페 게시판 RSS 주소를 넣으면 홈에서 최신글을 자동으로 불러옵니다.
