@@ -11,4 +11,8 @@ Thumbs.db
 #  - SUPABASE_ANON_KEY 는 공개되어도 안전한 키입니다(RLS 로 데이터 보호).
 #  - 절대로 service_role 키(비밀 키)는 프론트엔드/깃에 넣지 마세요.
 
+# Supabase CLI (로컬 연결 정보·비밀번호 보관 — 절대 커밋 금지)
+supabase/.temp/
+supabase/.branches/
+
 .vercel
