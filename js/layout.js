@@ -111,6 +111,16 @@
     document.head.appendChild(fav);
   }
 
+  // 웹폰트 — 우아한 한글 명조(제목) + 고딕(본문) + 라틴 세리프(영문 장식)
+  if (!document.getElementById("krs-fonts")) {
+    const p1 = document.createElement("link"); p1.rel = "preconnect"; p1.href = "https://fonts.googleapis.com"; document.head.appendChild(p1);
+    const p2 = document.createElement("link"); p2.rel = "preconnect"; p2.href = "https://fonts.gstatic.com"; p2.crossOrigin = "anonymous"; document.head.appendChild(p2);
+    const f = document.createElement("link");
+    f.id = "krs-fonts"; f.rel = "stylesheet";
+    f.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap";
+    document.head.appendChild(f);
+  }
+
   // 모바일 햄버거 토글
   const toggle = document.getElementById("nav-toggle");
   const navMenu = document.getElementById("nav-menu");
