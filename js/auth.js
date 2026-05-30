@@ -23,10 +23,18 @@ export function nicknameOf(user) {
 // member(일반) < operating(운영위원) < executive(집행위원) < admin(관리자)
 export const ROLE_LABEL = {
   member: "일반회원",
+  editor: "콘텐츠 편집자",
   operating: "운영위원",
   executive: "집행위원",
   admin: "관리자",
 };
+
+// 사이트 콘텐츠(자료·이미지·텍스트)를 편집할 수 있는 역할
+export const EDITOR_ROLES = ["editor", "executive", "admin"];
+export async function canEditContent() {
+  const role = await getRole();
+  return EDITOR_ROLES.indexOf(role) !== -1;
+}
 
 let _profileCache = null;
 export async function getProfile() {

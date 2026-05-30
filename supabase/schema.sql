@@ -75,14 +75,17 @@ create table if not exists public.profiles (
   created_at timestamptz not null default now()
 );
 
--- 가입 시 profiles 행 자동 생성 (기본 등급 member)
+-- 가입 시 profiles 행 자동 생성
+--  · 관리자 이메일(아래 목록)로 가입하면 자동으로 'admin' 권한 부여
+--  · 그 외는 'member'
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
   insert into public.profiles (user_id, nickname, role)
   values (new.id,
           coalesce(new.raw_user_meta_data->>'nickname', split_part(new.email,'@',1)),
-          'member')
+          case when lower(new.email) in ('korea-rose@naver.com')
+               then 'admin' else 'member' end)
   on conflict (user_id) do nothing;
   return new;
 end; $$;
@@ -216,6 +219,72 @@ create policy "committee files delete"
   using (
     bucket_id = 'committee-files' and (owner = auth.uid() or public.my_role() in ('executive','admin'))
   );
+
+-- ============================================================
+--  8) 섹션별 사이트 콘텐츠 (자료·이미지·텍스트, 날짜별 업데이트)
+--     협회소개/장미가꾸기/행사·정원/갤러리/굿즈 등 각 페이지에 콘텐츠 보드로 노출
+-- ============================================================
+
+-- 콘텐츠 편집 권한용 'editor' 역할 추가
+alter table public.profiles drop constraint if exists profiles_role_check;
+alter table public.profiles add constraint profiles_role_check
+  check (role in ('member','editor','operating','executive','admin'));
+
+create table if not exists public.site_contents (
+  id           uuid primary key default gen_random_uuid(),
+  section      text not null,                        -- about|guide|events|gallery|shop ...
+  title        text not null,
+  body         text,
+  image_url    text,                                 -- 대표 이미지
+  attachments  jsonb not null default '[]'::jsonb,   -- [{url,name,type}]
+  content_date date not null default current_date,   -- 날짜별 정렬 기준
+  author_id    uuid references auth.users (id) on delete set null,
+  author_name  text,
+  created_at   timestamptz not null default now()
+);
+create index if not exists site_contents_idx
+  on public.site_contents (section, content_date desc, created_at desc);
+
+alter table public.site_contents enable row level security;
+
+-- 읽기: 누구나 (공개 콘텐츠)
+drop policy if exists "site_contents read" on public.site_contents;
+create policy "site_contents read" on public.site_contents for select using (true);
+
+-- 쓰기/수정/삭제: 편집자 · 임원 · 관리자
+drop policy if exists "site_contents insert" on public.site_contents;
+create policy "site_contents insert" on public.site_contents for insert
+  with check (public.my_role() in ('editor','executive','admin'));
+drop policy if exists "site_contents update" on public.site_contents;
+create policy "site_contents update" on public.site_contents for update
+  using (public.my_role() in ('editor','executive','admin'));
+drop policy if exists "site_contents delete" on public.site_contents;
+create policy "site_contents delete" on public.site_contents for delete
+  using (public.my_role() in ('editor','executive','admin'));
+
+-- 공개 이미지·자료 버킷
+insert into storage.buckets (id, name, public)
+values ('site-content', 'site-content', true)
+on conflict (id) do nothing;
+
+drop policy if exists "site-content read" on storage.objects;
+create policy "site-content read" on storage.objects for select
+  using (bucket_id = 'site-content');
+drop policy if exists "site-content write" on storage.objects;
+create policy "site-content write" on storage.objects for insert to authenticated
+  with check (bucket_id = 'site-content' and public.my_role() in ('editor','executive','admin'));
+drop policy if exists "site-content delete" on storage.objects;
+create policy "site-content delete" on storage.objects for delete to authenticated
+  using (bucket_id = 'site-content' and public.my_role() in ('editor','executive','admin'));
+
+-- ============================================================
+--  ★ 관리자(어드민) 계정 지정
+--    • 사이트 로그인 화면에서 아래 이메일로 "회원가입" 하면 자동으로 관리자가 됩니다.
+--    • 이미 그 이메일로 가입돼 있다면, 아래 UPDATE 한 줄을 실행해 관리자로 승격하세요.
+--    • 관리자 이메일을 바꾸려면 위 handle_new_user() 함수와 아래 줄의 이메일을 함께 수정하세요.
+-- ============================================================
+update public.profiles set role = 'admin'
+where user_id in (select id from auth.users where lower(email) = 'korea-rose@naver.com');
 
 -- ============================================================
 --  완료! 이제 홈페이지에서 회원가입 → 로그인 → 스토리 업로드가 가능합니다.
