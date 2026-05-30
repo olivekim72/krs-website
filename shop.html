@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>굿즈샵 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>🛍️ 한국장미회 굿즈샵</h1>
+      <p>장미 모종·씨앗부터 한국장미회 기념품까지 — 곧 만나보실 수 있습니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="shop-banner">
+        <b>오픈 준비 중입니다</b><br>
+        사단법인 등록 절차가 마무리되면 정식으로 판매를 시작합니다. 아래는 미리 보기입니다.
+      </div>
+
+      <h2 class="section-title">상품 미리보기</h2>
+      <p class="section-sub">💡 상품은 <b>data/products.json</b> 에 추가하면 자동으로 표시됩니다.</p>
+      <div class="event-grid" id="shop-grid"></div>
+
+      <div class="prose" style="margin-top:40px; text-align:center;">
+        <h3>판매는 이렇게 준비됩니다</h3>
+        <p>사단법인 등록 후, 장바구니·결제(네이버페이/카드 등)를 연동하여
+           홈페이지에서 바로 구매할 수 있도록 확장할 예정입니다.
+           수익금은 장미 문화 보급과 정원 조성 등 한국장미회 활동에 쓰입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script src="js/shop.js"></script>
+  <script>loadProducts("shop-grid");</script>
+</body>
+</html>

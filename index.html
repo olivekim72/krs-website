@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한국장미회 | Korea Rose Society</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <!-- 히어로 -->
+  <!-- 메인 대문 (네이버 카페 대문 배너 이미지) -->
+  <section class="hero-banner">
+    <img src="images/main%20image.jpg" alt="한국장미회 · Korea Rose Society">
+  </section>
+
+  <!-- 인사말 + 바로가기 -->
+  <section class="hero-intro">
+    <div class="container">
+      <h1 class="hero-tag">장미를 사랑하는 사람들의 모임</h1>
+      <p class="hero-desc">한국장미회는 세계장미회(WFRS) 회원 단체로서, 장미 문화의 보급과 교육,
+         국제 교류, 그리고 회원 간의 배움과 나눔을 이어갑니다.</p>
+      <div class="btns">
+        <a href="join.html" class="btn" style="background:var(--rose-deep);color:#fff;">회원이 되어주세요</a>
+        <a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener" class="btn" style="background:#03c75a;color:#fff;">☕ 네이버 카페</a>
+        <a href="stories.html" class="btn" style="background:#fff;color:var(--rose-deep);border:1px solid var(--rose-light);">회원 스토리</a>
+      </div>
+      <p class="hero-contact">
+        📧 <a href="mailto:korea-rose@naver.com">korea-rose@naver.com</a>
+        &nbsp;·&nbsp; ☕ <a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener">cafe.naver.com/korearose</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 네이버 카페 최신글 -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">📢 네이버 카페 최신글</h2>
+      <p class="section-sub">한국장미회 네이버 카페의 새 소식을 한눈에</p>
+      <div class="cafe-list" id="cafe-list"></div>
+      <div style="text-align:center; margin-top:28px;">
+        <a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener" class="btn" style="background:#03c75a;color:#fff;">네이버 카페 바로가기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 협회 소개 요약 -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">한국장미회 소개</h2>
+      <p class="section-sub">우리는 이렇게 운영됩니다</p>
+      <div class="cards">
+        <div class="card">
+          <div class="ic">🎖️</div>
+          <h3>집행 · 운영위원회</h3>
+          <p>회의 운영과 주요 의사결정, 행사 기획·실무 운영을 담당합니다.</p>
+          <ul>
+            <li>회장 · 차기회장</li>
+            <li>교육 · 정원 · 홍보 분과</li>
+            <li>대외협력</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="ic">🌹</div>
+          <h3>장미 교육 · 정원</h3>
+          <p>전정 실습, 정원 탐방, 계절별 관리 특강으로 함께 배우고 가꿉니다.</p>
+          <ul>
+            <li>봄·여름 장미 교육</li>
+            <li>장미정원 투어</li>
+            <li>세계평화의 장미정원</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="ic">🌍</div>
+          <h3>WFRS 국제교류</h3>
+          <p>세계장미회와 함께 국제 컨퍼런스·교류 활동에 참여합니다.</p>
+          <ul>
+            <li>국제 컨퍼런스</li>
+            <li>해외 협회 교류</li>
+            <li>신품종 정보 공유</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="about.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">협회 소개 자세히 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 다가오는 행사 -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">다가오는 행사</h2>
+      <p class="section-sub">전시회 · 월간모임 · 교육 · 국제교류 소식</p>
+      <div class="event-grid" id="event-preview"></div>
+      <div style="text-align:center; margin-top:36px;">
+        <a href="events.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">전체 행사 일정 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 최신 회원 스토리 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">최신 회원 스토리</h2>
+      <p class="section-sub">회원들이 직접 올린 장미 이야기 — 사진과 함께 나눠요</p>
+      <div class="event-grid" id="story-preview"></div>
+      <div style="text-align:center; margin-top:36px;">
+        <a href="stories.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">회원 스토리 마당 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 장미 가꾸기 하이라이트 -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">장미, 함께 배워요</h2>
+      <p class="section-sub">초보자도 따라 할 수 있는 장미 가꾸기 정보</p>
+      <div class="cards">
+        <div class="card"><div class="ic">📖</div><h3>장미의 기원과 분류</h3><p>야생장미부터 현대 장미까지, 장미의 역사와 종류를 알아봅니다.</p></div>
+        <div class="card"><div class="ic">✂️</div><h3>전정과 유인</h3><p>건강하고 풍성한 개화를 위한 가지치기·유인의 기본기.</p></div>
+        <div class="card"><div class="ic">🗓️</div><h3>계절별 관리</h3><p>봄·여름·가을·겨울, 시기별 물주기·병해충·월동 관리 요령.</p></div>
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="guide.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">장미 가꾸기 가이드 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 굿즈샵 티저 -->
+  <section class="section">
+    <div class="container">
+      <div class="shop-banner">
+        <b>🛍️ 한국장미회 굿즈샵 오픈 준비 중</b><br>
+        사단법인 등록 후, 장미 모종·씨앗과 한국장미회 기념품을 만나보실 수 있습니다.
+        <div style="margin-top:14px;"><a href="shop.html" class="btn btn-primary" style="background:#fff;color:var(--rose-deep);">미리 둘러보기 →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 입회 CTA -->
+  <section class="section section-alt">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">장미를 사랑하는 누구나 함께할 수 있습니다</h2>
+      <p class="section-sub">온라인 입회서를 작성하면 사무국에서 확인 후 연락드립니다.</p>
+      <a href="join.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">회원 입회신청 →</a>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <!-- 공통 스크립트 -->
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <!-- 페이지 스크립트 -->
+  <script src="js/events.js"></script>
+  <script>loadEvents("event-preview", 3);</script>
+  <script src="js/cafe.js"></script>
+  <script>loadCafePosts("cafe-list", 5);</script>
+  <script type="module" src="js/stories.js"></script>
+</body>
+</html>

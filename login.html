@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 · 회원가입 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>로그인 · 회원가입</h1>
+      <p>회원 스토리를 올리고 함께 나누려면 로그인이 필요합니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-wrap" style="max-width:460px;">
+
+        <div id="auth-config-notice"></div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">로그인</button>
+          <button class="auth-tab" data-tab="signup">회원가입</button>
+        </div>
+
+        <!-- 로그인 -->
+        <form id="login-form">
+          <div class="field"><label>이메일</label><input type="email" name="email" required placeholder="rose@example.com"></div>
+          <div class="field"><label>비밀번호</label><input type="password" name="password" required placeholder="비밀번호"></div>
+          <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;width:100%;border:none;cursor:pointer;font-size:16px;">로그인</button>
+        </form>
+
+        <!-- 회원가입 -->
+        <form id="signup-form" style="display:none;">
+          <div class="field"><label>닉네임(표시 이름)</label><input type="text" name="nickname" required placeholder="예) 장미사랑"></div>
+          <div class="field"><label>이메일</label><input type="email" name="email" required placeholder="rose@example.com"></div>
+          <div class="field"><label>비밀번호 (6자 이상)</label><input type="password" name="password" required minlength="6" placeholder="비밀번호"></div>
+          <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;width:100%;border:none;cursor:pointer;font-size:16px;">회원가입</button>
+        </form>
+
+        <div id="auth-msg" style="margin-top:18px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module">
+    import { signIn, signUp, isConfigured, getUser } from "./js/auth.js";
+
+    const msg = document.getElementById("auth-msg");
+    const loginForm = document.getElementById("login-form");
+    const signupForm = document.getElementById("signup-form");
+
+    // 설정 안내 + 이미 로그인된 경우
+    if (!isConfigured) {
+      document.getElementById("auth-config-notice").innerHTML =
+        '<div class="notice notice-warn"><b>⚙️ 로그인 설정이 필요합니다.</b><br>' +
+        '<code>js/config.js</code> 에 Supabase 정보를 입력하세요. (스토리업로드방법.md 참고)</div>';
+    } else {
+      getUser().then(function (u) {
+        if (u) {
+          msg.innerHTML = '<div class="notice notice-ok">이미 로그인되어 있습니다. <a href="stories.html">회원 스토리로 이동 →</a></div>';
+        }
+      });
+    }
+
+    // 탭 전환
+    document.querySelectorAll(".auth-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        document.querySelectorAll(".auth-tab").forEach(function (t) { t.classList.remove("active"); });
+        tab.classList.add("active");
+        const isLogin = tab.dataset.tab === "login";
+        loginForm.style.display = isLogin ? "block" : "none";
+        signupForm.style.display = isLogin ? "none" : "block";
+        msg.innerHTML = "";
+      });
+    });
+
+    function show(type, text) {
+      msg.innerHTML = '<div class="notice ' + (type === "ok" ? "notice-ok" : "notice-warn") + '">' + text + "</div>";
+    }
+
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      if (!isConfigured) return show("warn", "먼저 Supabase 설정을 완료해주세요.");
+      const btn = loginForm.querySelector("button"); btn.disabled = true;
+      try {
+        const res = await signIn(loginForm.email.value.trim(), loginForm.password.value);
+        if (res.error) throw res.error;
+        show("ok", "로그인 성공! 잠시 후 이동합니다…");
+        setTimeout(function () { location.href = "stories.html"; }, 800);
+      } catch (err) {
+        show("warn", "로그인 실패: " + (err.message || err));
+      } finally { btn.disabled = false; }
+    });
+
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      if (!isConfigured) return show("warn", "먼저 Supabase 설정을 완료해주세요.");
+      const btn = signupForm.querySelector("button"); btn.disabled = true;
+      try {
+        const res = await signUp(signupForm.email.value.trim(), signupForm.password.value, signupForm.nickname.value.trim());
+        if (res.error) throw res.error;
+        // 이메일 확인이 꺼져 있으면 바로 세션이 생깁니다.
+        if (res.data && res.data.session) {
+          show("ok", "가입 완료! 잠시 후 이동합니다…");
+          setTimeout(function () { location.href = "stories.html"; }, 900);
+        } else {
+          show("ok", "가입 신청 완료! 이메일 확인이 켜져 있다면 메일의 링크를 눌러 인증해주세요. 그 후 로그인하시면 됩니다.");
+        }
+      } catch (err) {
+        show("warn", "가입 실패: " + (err.message || err));
+      } finally { btn.disabled = false; }
+    });
+  </script>
+</body>
+</html>

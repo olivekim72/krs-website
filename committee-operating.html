@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>운영위원회 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>운영위원회 🔒</h1>
+      <p>각 분과(커미티) 위원장들의 모임 — 운영위원 · 집행위원 · 관리자 전용 공간입니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div id="committee-gate"></div>
+
+      <div id="committee-app" data-committee="operating" style="display:none;">
+
+        <h2 class="section-title" style="text-align:left;">분과 위원장</h2>
+        <div class="roster">
+          <div class="org-box"><div class="role">📚</div><h4>교육분과 위원장</h4><p>교육 프로그램</p></div>
+          <div class="org-box"><div class="role">🌿</div><h4>정원분과 위원장</h4><p>정원 프로젝트</p></div>
+          <div class="org-box"><div class="role">📣</div><h4>홍보분과 위원장</h4><p>홍보·아카이브</p></div>
+          <div class="org-box"><div class="role">🌍</div><h4>대외협력 위원장</h4><p>외부협력·WFRS</p></div>
+        </div>
+
+        <div class="board-head" style="margin-top:28px;">
+          <div>
+            <h2>운영위원회 게시판</h2>
+            <p>회의 안건, 운영 논의, 공지 등을 공유합니다.</p>
+          </div>
+          <button id="committee-new-btn" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;">+ 글 작성</button>
+        </div>
+
+        <form id="committee-form" class="form-wrap" style="display:none;">
+          <div class="field"><label>제목 *</label><input type="text" name="title" required placeholder="예) 6월 운영위 회의 안건"></div>
+          <div class="field"><label>내용 *</label><textarea name="content" required placeholder="안건·논의 내용을 작성하세요."></textarea></div>
+          <div class="field">
+            <label>문서 · 이미지 첨부 (여러 개 가능)</label>
+            <input type="file" name="files" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp,.hwpx,.txt,.zip">
+            <p class="form-note">이미지는 미리보기로, 문서는 다운로드 링크로 공유됩니다. 위원회 권한이 있는 회원만 열람할 수 있습니다. (개당 15MB 이하)</p>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;flex:1;">등록</button>
+            <button type="button" class="cancel-btn">취소</button>
+          </div>
+        </form>
+
+        <div id="committee-status" style="margin:14px 0;"></div>
+        <div class="post-list" id="committee-posts"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/committee.js"></script>
+</body>
+</html>

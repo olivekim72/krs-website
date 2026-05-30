@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 입회신청 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>회원 입회신청서</h1>
+      <p>아래 양식을 작성해 주시면 사무국에서 확인 후 연락드립니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <form class="form-wrap" onsubmit="event.preventDefault(); document.getElementById('done').style.display='block'; this.style.display='none'; window.scrollTo({top:0,behavior:'smooth'});">
+        <div class="field">
+          <label>성명 *</label>
+          <input type="text" required placeholder="홍길동">
+        </div>
+        <div class="field">
+          <label>연락처 *</label>
+          <input type="tel" required placeholder="010-0000-0000">
+        </div>
+        <div class="field">
+          <label>이메일</label>
+          <input type="email" placeholder="rose@example.com">
+        </div>
+        <div class="field">
+          <label>회원 구분</label>
+          <select>
+            <option>일반회원</option>
+            <option>단체회원</option>
+            <option>학생회원</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>장미 재배 경력</label>
+          <select>
+            <option>입문 (1년 미만)</option>
+            <option>초급 (1~3년)</option>
+            <option>중급 (3~7년)</option>
+            <option>고급 (7년 이상)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>관심 분야 / 가입 동기</label>
+          <textarea placeholder="예) 장미 재배에 관심이 많아 전정·관리 실습에 참여하고 싶습니다."></textarea>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" required style="width:auto;"> 개인정보 수집·이용에 동의합니다. *</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;width:100%;border:none;cursor:pointer;font-size:16px;">
+          입회신청서 제출하기
+        </button>
+        <p class="form-note">* 시안에서는 실제 전송되지 않습니다. 실제 운영 시 사무국 이메일/DB로 자동 접수되도록 연결할 수 있습니다.</p>
+      </form>
+
+      <div id="done" style="display:none; text-align:center; max-width:640px; margin:0 auto; background:#fff; padding:50px; border-radius:16px; box-shadow:var(--shadow);">
+        <div style="font-size:54px;">🌹</div>
+        <h2 style="color:var(--rose-deep); margin:16px 0;">입회신청이 접수되었습니다!</h2>
+        <p style="color:var(--gray);">사무국에서 확인 후 연락드리겠습니다. 한국장미회와 함께해 주셔서 감사합니다.</p>
+        <a href="index.html" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;margin-top:20px;">홈으로 돌아가기</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

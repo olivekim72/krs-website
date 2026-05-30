@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사진 갤러리 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>사진 갤러리</h1>
+      <p>토요장미모임·정원투어·행사의 아름다운 순간을 사진으로 만나보세요.</p>
+    </div>
+  </section>
+
+  <!-- 행사 · 정원 사진 -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">행사 · 정원 사진</h2>
+      <p class="section-sub">토요장미모임 · 장미정원투어 · 전시회의 기록</p>
+      <div class="gallery-grid" id="event-gallery"></div>
+      <p class="form-note" style="text-align:center;margin-top:18px;">※ 실제 사진을 <code>images/</code> 폴더에 넣고 아래 데이터에 연결하면 자동 표시됩니다.</p>
+    </div>
+  </section>
+
+  <!-- 라이트박스 -->
+  <div class="modal" id="lightbox">
+    <div class="modal-card" style="max-width:760px;">
+      <button class="modal-close" aria-label="닫기">✕</button>
+      <div class="modal-body" id="lightbox-body"></div>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script>
+    // 갤러리 데이터 (실제 사진이 준비되면 image 경로를 채우세요. 없으면 emoji 표시)
+    const EVENTS_PHOTO = [
+      { grade: "토요장미모임", title: "장미 전정 실습", emoji: "✂️", image: "" },
+      { grade: "장미정원투어", title: "장미정원 1박 2일", emoji: "🚌", image: "" },
+      { grade: "전시회", title: "2026 봄 장미 전시회", emoji: "🏛️", image: "" },
+      { grade: "행사", title: "서울장미축제", emoji: "🌹", image: "" },
+    ];
+
+    function itemHTML(it) {
+      const inner = it.image
+        ? '<img src="' + it.image + '" alt="' + it.title + '">'
+        : '<div class="gallery-emoji">' + (it.emoji || "🌹") + "</div>";
+      return (
+        '<div class="gallery-item" data-emoji="' + (it.emoji || "🌹") +
+          '" data-image="' + it.image + '" data-title="' + it.title + '" data-grade="' + it.grade + '">' +
+          inner +
+          '<div class="gallery-cap"><b>' + it.grade + "</b><br>" + it.title + "</div>" +
+        "</div>"
+      );
+    }
+    function render(id, list) {
+      document.getElementById(id).innerHTML = list.map(itemHTML).join("");
+    }
+    render("event-gallery", EVENTS_PHOTO);
+
+    // 라이트박스
+    const lb = document.getElementById("lightbox");
+    const lbBody = document.getElementById("lightbox-body");
+    function closeLb() { lb.classList.remove("open"); }
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target.classList.contains("modal-close")) closeLb();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLb(); });
+    document.addEventListener("click", function (e) {
+      const item = e.target.closest(".gallery-item");
+      if (!item) return;
+      const img = item.dataset.image;
+      const big = img
+        ? '<img class="modal-img" src="' + img + '" alt="">'
+        : '<div style="height:320px;display:grid;place-items:center;font-size:120px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));border-radius:18px 18px 0 0;color:#fff;">' + item.dataset.emoji + "</div>";
+      lbBody.innerHTML =
+        big +
+        '<span class="event-tag" style="margin:22px 28px 0;">' + item.dataset.grade + "</span>" +
+        '<h2 style="margin:10px 28px 16px;">' + item.dataset.title + "</h2>";
+      lb.classList.add("open");
+    });
+  </script>
+</body>
+</html>

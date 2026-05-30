@@ -1,0 +1,140 @@
+// ===== 공통 헤더/푸터 주입 =====
+// 모든 페이지에 동일한 내비게이션과 푸터를 한 곳에서 관리합니다.
+// 각 페이지 <body> 안에 <div id="site-header"></div> 와 <div id="site-footer"></div> 만 두면 됩니다.
+(function () {
+  // 상단 메뉴 — 제목만 봐도 내용을 알 수 있게 구성
+  const PAGES = [
+    { href: "index.html",   label: "홈" },
+    { href: "about.html",   label: "협회 소개" },
+    { href: "guide.html",   label: "장미 가꾸기" },
+    { label: "행사·정원", match: "events.html", dropdown: [
+      { href: "events.html#sat",    label: "토요장미모임" },
+      { href: "events.html#tour",   label: "장미정원투어" },
+      { href: "events.html#events", label: "행사 & 이벤트" },
+    ] },
+    { href: "gallery.html", label: "사진 갤러리" },
+    { href: "stories.html", label: "회원 스토리" },
+    { href: "qna.html",     label: "Q&A" },
+    { href: "shop.html",    label: "굿즈샵" },
+  ];
+
+  const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  const menu = PAGES.map(function (p) {
+    if (p.dropdown) {
+      const sub = p.dropdown.map(function (c) {
+        return '<li><a href="' + c.href + '">' + c.label + "</a></li>";
+      }).join("");
+      const active = p.match && p.match === current ? " active" : "";
+      return '<li class="nav-dd"><a href="#" class="menu-link' + active + '">' + p.label +
+        ' ▾</a><ul class="dd-list">' + sub + "</ul></li>";
+    }
+    const active = p.href.toLowerCase() === current ? " active" : "";
+    return '<li><a href="' + p.href + '" class="menu-link' + active + '">' + p.label + "</a></li>";
+  }).join("") +
+  // 회원 전용 드롭다운 (기본 숨김 — auth.js 가 로그인 역할에 따라 표시/구성)
+  '<li class="nav-dd" id="member-menu" style="display:none;">' +
+    '<a href="#" class="menu-link" id="member-menu-toggle">회원 전용 ▾</a>' +
+    '<ul class="dd-list" id="member-menu-list"></ul>' +
+  "</li>";
+
+  // 최상단 연락처 바 (전 페이지 공통)
+  const topbar =
+    '<div class="topbar">' +
+      '<div class="container topbar-inner">' +
+        '<span class="topbar-org">🌹 한국장미회 · Korea Rose Society</span>' +
+        '<span class="topbar-links">' +
+          '<a href="mailto:korea-rose@naver.com">📧 korea-rose@naver.com</a>' +
+          '<a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener">☕ 네이버 카페</a>' +
+        "</span>" +
+      "</div>" +
+    "</div>";
+
+  const header =
+    topbar +
+    '<header class="site-header">' +
+      '<div class="container nav">' +
+        '<a href="index.html" class="brand">' +
+          '<span class="logo"><img src="images/logo.jpg" alt="한국장미회 로고"></span>' +
+          '<span class="name">한국장미회<small>KOREA ROSE SOCIETY · WFRS</small></span>' +
+        "</a>" +
+        '<button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기">☰</button>' +
+        '<ul class="menu" id="nav-menu">' + menu + "</ul>" +
+        '<div class="nav-right">' +
+          '<span id="auth-slot" class="auth-slot"><a href="login.html" class="auth-link">로그인</a></span>' +
+          '<a href="join.html" class="nav-cta">입회신청</a>' +
+        "</div>" +
+      "</div>" +
+    "</header>";
+
+  const year = "2026";
+  const footer =
+    '<footer class="footer" id="contact">' +
+      '<div class="container">' +
+        '<div class="cols">' +
+          "<div>" +
+            "<h4>🌹 한국장미회</h4>" +
+            '<p style="opacity:.85;font-size:14px;max-width:300px;">세계장미회(WFRS) 회원 단체.<br>장미 문화의 보급·교육과 국제 교류, 회원 간 배움과 나눔을 이어갑니다.</p>' +
+            '<p style="opacity:.9;font-size:14px;margin-top:12px;">📧 <a href="mailto:korea-rose@naver.com" style="display:inline;padding:0;">korea-rose@naver.com</a></p>' +
+          "</div>" +
+          "<div>" +
+            "<h4>바로가기</h4>" +
+            '<a href="about.html">협회 소개</a>' +
+            '<a href="guide.html">장미 가꾸기</a>' +
+            '<a href="events.html">행사·정원</a>' +
+            '<a href="gallery.html">사진 갤러리</a>' +
+            '<a href="stories.html">회원 스토리</a>' +
+          "</div>" +
+          "<div>" +
+            "<h4>함께하기 · 연락처</h4>" +
+            '<a href="join.html">회원 입회신청</a>' +
+            '<a href="shop.html">굿즈샵 (오픈 예정)</a>' +
+            '<a href="mailto:korea-rose@naver.com">📧 korea-rose@naver.com</a>' +
+            '<a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener">☕ 네이버 카페 바로가기</a>' +
+          "</div>" +
+        "</div>" +
+        '<div class="copy">© ' + year + " 한국장미회 (Korea Rose Society) · 시안(prototype) — 내용은 임시 예시입니다.</div>" +
+      "</div>" +
+    "</footer>";
+
+  // outerHTML 로 교체 — 헤더를 body 직속으로 두어야 position:sticky 가 정상 동작합니다.
+  const h = document.getElementById("site-header");
+  if (h) h.outerHTML = header;
+  const f = document.getElementById("site-footer");
+  if (f) f.outerHTML = footer;
+
+  // 파비콘(브라우저 탭 아이콘) — 전 페이지 공통 주입
+  if (!document.querySelector('link[rel="icon"]')) {
+    const fav = document.createElement("link");
+    fav.rel = "icon";
+    fav.href = "images/logo.jpg";
+    document.head.appendChild(fav);
+  }
+
+  // 모바일 햄버거 토글
+  const toggle = document.getElementById("nav-toggle");
+  const navMenu = document.getElementById("nav-menu");
+  if (toggle && navMenu) {
+    toggle.addEventListener("click", function () {
+      navMenu.classList.toggle("open");
+    });
+  }
+
+  // 드롭다운 토글 — 행사·정원, 회원 전용 등 모든 .nav-dd 공통
+  const dropdowns = Array.prototype.slice.call(document.querySelectorAll(".nav-dd"));
+  dropdowns.forEach(function (dd) {
+    const toggle = dd.querySelector(":scope > .menu-link");
+    if (toggle) {
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdowns.forEach(function (o) { if (o !== dd) o.classList.remove("open"); });
+        dd.classList.toggle("open");
+      });
+    }
+  });
+  document.addEventListener("click", function (e) {
+    dropdowns.forEach(function (dd) {
+      if (!dd.contains(e.target)) dd.classList.remove("open");
+    });
+  });
+})();

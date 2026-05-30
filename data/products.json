@@ -1,0 +1,50 @@
+[
+  {
+    "name": "장미 모종 (포트묘)",
+    "price": 12000,
+    "category": "원예",
+    "emoji": "🌱",
+    "image": "",
+    "status": "준비 중"
+  },
+  {
+    "name": "장미 씨앗 모음",
+    "price": 6000,
+    "category": "원예",
+    "emoji": "🌰",
+    "image": "",
+    "status": "준비 중"
+  },
+  {
+    "name": "한국장미회 에코백",
+    "price": 15000,
+    "category": "굿즈",
+    "emoji": "👜",
+    "image": "",
+    "status": "준비 중"
+  },
+  {
+    "name": "장미 일러스트 엽서 세트",
+    "price": 5000,
+    "category": "굿즈",
+    "emoji": "💌",
+    "image": "",
+    "status": "준비 중"
+  },
+  {
+    "name": "장미 가꾸기 가이드북",
+    "price": 18000,
+    "category": "도서",
+    "emoji": "📗",
+    "image": "",
+    "status": "준비 중"
+  },
+  {
+    "name": "전정 가위 (원예용)",
+    "price": 22000,
+    "category": "도구",
+    "emoji": "✂️",
+    "image": "",
+    "status": "준비 중"
+  }
+]

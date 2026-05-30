@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원관리 | 한국장미회</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <section class="hero page-hero">
+    <div class="container">
+      <h1>회원관리 🔒</h1>
+      <p>집행위원 · 관리자 전용 — 회원 명부와 회비 납부 현황을 관리합니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- 접근 권한 안내 영역 -->
+      <div id="members-gate"></div>
+
+      <!-- 권한 통과 시 표시 -->
+      <div id="members-app" style="display:none;">
+        <div class="board-head">
+          <div>
+            <h2>회원 명부</h2>
+            <p>이름 · 연락처 · 주소 · 회비 납부 · 입회일 등을 관리합니다.</p>
+          </div>
+          <button id="add-member-btn" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;">+ 회원 추가</button>
+        </div>
+
+        <form id="member-form" class="form-wrap" style="display:none;">
+          <h3 name="title_label" id="member-form-title" style="color:var(--rose-deep);margin-bottom:18px;">회원 추가</h3>
+          <div class="form-row">
+            <div class="field"><label>이름 *</label><input type="text" name="name" required placeholder="홍길동"></div>
+            <div class="field"><label>연락처</label><input type="tel" name="phone" placeholder="010-0000-0000"></div>
+          </div>
+          <div class="field"><label>주소</label><input type="text" name="address" placeholder="서울시 ..."></div>
+          <div class="form-row">
+            <div class="field"><label>이메일</label><input type="email" name="email" placeholder="rose@example.com"></div>
+            <div class="field"><label>회원 구분</label>
+              <select name="member_type"><option>일반회원</option><option>단체회원</option><option>학생회원</option><option>임원</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>입회일</label><input type="date" name="join_date"></div>
+            <div class="field"><label>회비 납부</label><br><label style="font-weight:400;"><input type="checkbox" name="fee_paid" style="width:auto;"> 납부 완료</label></div>
+          </div>
+          <div class="field"><label>비고</label><textarea name="note" placeholder="메모"></textarea></div>
+          <div style="display:flex;gap:12px;">
+            <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;flex:1;">저장</button>
+            <button type="button" class="cancel-btn">취소</button>
+          </div>
+        </form>
+
+        <div id="members-status" style="margin:14px 0;"></div>
+        <div class="table-wrap"><table class="data-table" id="members-table"></table></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/layout.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/members.js"></script>
+</body>
+</html>
