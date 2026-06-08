@@ -63,7 +63,7 @@ function notConfiguredHTML() {
   return (
     '<div class="notice notice-warn">' +
       "<b>⚙️ 스토리 기능 설정이 필요합니다.</b><br>" +
-      "<code>js/config.js</code> 에 Supabase 정보를 입력하면 회원 스토리 업로드·공유가 활성화됩니다. " +
+      "<code>js/config.js</code> 에 Supabase 정보를 입력하면 회원이야기 업로드·공유가 활성화됩니다. " +
       '자세한 방법은 <b>스토리업로드방법.md</b> 를 참고하세요.' +
     "</div>"
   );
@@ -76,7 +76,7 @@ async function initPreview(el) {
   if (!isConfigured) {
     el.innerHTML =
       '<p style="grid-column:1/-1;text-align:center;color:var(--gray)">' +
-      "회원 스토리 기능 준비 중입니다. 🌹</p>";
+      "회원이야기 기능 준비 중입니다. 🌹</p>";
     return;
   }
   const data = await fetchStories(3);

@@ -13,7 +13,6 @@
     ] },
     { href: "gallery.html", label: "활동" },
     { href: "stories.html", label: "회원이야기" },
-    { href: "qna.html",     label: "Q&A" },
     { href: "shop.html",    label: "굿즈샵" },
   ];
 
@@ -41,8 +40,8 @@
     '<header class="site-header">' +
       '<div class="container nav">' +
         '<a href="index.html" class="brand">' +
-          '<span class="logo"><img src="images/logo.jpg" alt="한국장미회 로고"></span>' +
-          '<span class="name">한국장미회<small>KOREA ROSE SOCIETY · WFRS</small></span>' +
+          '<span class="logo"><img src="images/logo.png" alt="한국장미회 로고"></span>' +
+          '<span class="name">한국장미회<small>KOREA ROSE SOCIETY</small></span>' +
         "</a>" +
         '<button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기">☰</button>' +
         '<ul class="menu" id="nav-menu">' + menu + "</ul>" +
