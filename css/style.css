@@ -171,6 +171,10 @@ img { max-width: 100%; display: block; }
 }
 .event-body h3 { font-size: 18px; margin-bottom: 6px; }
 .event-date { color: var(--gray); font-size: 14px; }
+.event-card.has-detail { cursor: pointer; }
+.event-summary { color: var(--ink); font-size: 14px; margin-top: 8px; line-height: 1.55; }
+.event-more { display: inline-block; margin-top: 12px; color: var(--rose-deep); font-weight: 600; font-size: 13px; }
+.event-card.has-detail:hover .event-more { text-decoration: underline; }
 
 /* ===== 폼 (입회신청) ===== */
 .form-wrap { max-width: 640px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 16px; box-shadow: var(--shadow); }
