@@ -137,6 +137,12 @@ img { max-width: 100%; display: block; }
 .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--rose-light); }
 .card:hover::before { opacity: .95; }
 .card .ic { font-size: 30px; margin-bottom: 10px; }
+/* 카드 상단 사진 (이모지 아이콘 대체) — 카드 가장자리까지 꽉 차게 */
+.card .card-img {
+  height: 168px; margin: -30px -28px 18px;
+  background: var(--rose-light) center / cover no-repeat;
+  border-bottom: 1px solid var(--line);
+}
 .card h3 { color: var(--rose-deep); margin-bottom: 8px; font-size: 19px; }
 .card p { color: var(--gray); font-size: 15px; }
 .card ul { list-style: none; margin-top: 12px; font-size: 14px; }
