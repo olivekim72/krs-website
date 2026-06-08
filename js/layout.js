@@ -4,16 +4,15 @@
 (function () {
   // 상단 메뉴 — 제목만 봐도 내용을 알 수 있게 구성
   const PAGES = [
-    { href: "index.html",   label: "홈" },
-    { href: "about.html",   label: "협회 소개" },
+    { href: "about.html",   label: "한국장미회 소개" },
     { href: "guide.html",   label: "장미 가꾸기" },
-    { label: "행사·정원", match: "events.html", dropdown: [
+    { label: "교육행사", match: "events.html", dropdown: [
       { href: "events.html#sat",    label: "토요장미모임" },
       { href: "events.html#tour",   label: "장미정원투어" },
       { href: "events.html#events", label: "행사 & 이벤트" },
     ] },
-    { href: "gallery.html", label: "사진 갤러리" },
-    { href: "stories.html", label: "회원 스토리" },
+    { href: "gallery.html", label: "활동" },
+    { href: "stories.html", label: "회원이야기" },
     { href: "qna.html",     label: "Q&A" },
     { href: "shop.html",    label: "굿즈샵" },
   ];
@@ -38,20 +37,7 @@
     '<ul class="dd-list" id="member-menu-list"></ul>' +
   "</li>";
 
-  // 최상단 연락처 바 (전 페이지 공통)
-  const topbar =
-    '<div class="topbar">' +
-      '<div class="container topbar-inner">' +
-        '<span class="topbar-org">🌹 한국장미회 · Korea Rose Society</span>' +
-        '<span class="topbar-links">' +
-          '<a href="mailto:korea-rose@naver.com">📧 korea-rose@naver.com</a>' +
-          '<a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener">☕ 네이버 카페</a>' +
-        "</span>" +
-      "</div>" +
-    "</div>";
-
   const header =
-    topbar +
     '<header class="site-header">' +
       '<div class="container nav">' +
         '<a href="index.html" class="brand">' +
@@ -79,11 +65,11 @@
           "</div>" +
           "<div>" +
             "<h4>바로가기</h4>" +
-            '<a href="about.html">협회 소개</a>' +
+            '<a href="about.html">한국장미회 소개</a>' +
             '<a href="guide.html">장미 가꾸기</a>' +
-            '<a href="events.html">행사·정원</a>' +
-            '<a href="gallery.html">사진 갤러리</a>' +
-            '<a href="stories.html">회원 스토리</a>' +
+            '<a href="events.html">교육행사</a>' +
+            '<a href="gallery.html">활동</a>' +
+            '<a href="stories.html">회원이야기</a>' +
           "</div>" +
           "<div>" +
             "<h4>함께하기 · 연락처</h4>" +

@@ -4,7 +4,7 @@
     "price": 12000,
     "category": "원예",
     "emoji": "🌱",
-    "image": "",
+    "image": "images/garden/r111.jpg",
     "status": "준비 중"
   },
   {
@@ -28,7 +28,7 @@
     "price": 5000,
     "category": "굿즈",
     "emoji": "💌",
-    "image": "",
+    "image": "images/garden/r123.jpg",
     "status": "준비 중"
   },
   {
@@ -36,7 +36,7 @@
     "price": 18000,
     "category": "도서",
     "emoji": "📗",
-    "image": "",
+    "image": "images/garden/r103.jpg",
     "status": "준비 중"
   },
   {

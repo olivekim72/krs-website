@@ -10,7 +10,8 @@
 
   <div id="site-header"></div>
 
-  <section class="hero page-hero">
+  <section class="hero page-hero photo-hero">
+    <img class="hero-bg" src="images/garden/r50.jpg" alt="">
     <div class="container">
       <h1>사진 갤러리</h1>
       <p>토요장미모임·정원투어·행사의 아름다운 순간을 사진으로 만나보세요.</p>
@@ -51,10 +52,14 @@
   <script>
     // 갤러리 데이터 (실제 사진이 준비되면 image 경로를 채우세요. 없으면 emoji 표시)
     const EVENTS_PHOTO = [
-      { grade: "토요장미모임", title: "장미 전정 실습", emoji: "✂️", image: "" },
-      { grade: "장미정원투어", title: "장미정원 1박 2일", emoji: "🚌", image: "" },
-      { grade: "전시회", title: "2026 봄 장미 전시회", emoji: "🏛️", image: "" },
-      { grade: "행사", title: "서울장미축제", emoji: "🌹", image: "" },
+      { grade: "토요장미모임", title: "장미 전정 실습", emoji: "✂️", image: "images/garden/r38.jpg" },
+      { grade: "장미정원투어", title: "장미정원 1박 2일", emoji: "🚌", image: "images/garden/r50.jpg" },
+      { grade: "전시회", title: "2026 봄 장미 전시회", emoji: "🏛️", image: "images/garden/r32.jpg" },
+      { grade: "행사", title: "서울장미축제", emoji: "🌹", image: "images/garden/r36.jpg" },
+      { grade: "정원", title: "영국식 장미정원", emoji: "🌿", image: "images/garden/r44.jpg" },
+      { grade: "정원투어", title: "라벤더 & 장미", emoji: "💜", image: "images/garden/r45.jpg" },
+      { grade: "정원", title: "벽돌담 덩굴장미", emoji: "🧱", image: "images/garden/r53.jpg" },
+      { grade: "품종", title: "장미 한 송이", emoji: "🌹", image: "images/garden/r77.jpg" },
     ];
 
     function itemHTML(it) {

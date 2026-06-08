@@ -7,6 +7,16 @@ Thumbs.db
 # Vercel
 .vercel
 
+# 원본 자료 아카이브(40GB) — 절대 커밋 금지. images/garden/ 에 최적화본만 사용
+/2016-2026 한국장미회/
+
+# 이미지 선별 작업용 미리보기/스크립트
+/.preview/
+
+# 로컬 전용(배포·커밋 제외) — 내부 검토 페이지 / 디자인 참고 목업
+/image-review.html
+/images/sample image.jpg
+
 # 참고: js/config.js 는 커밋해도 됩니다.
 #  - SUPABASE_ANON_KEY 는 공개되어도 안전한 키입니다(RLS 로 데이터 보호).
 #  - 절대로 service_role 키(비밀 키)는 프론트엔드/깃에 넣지 마세요.
