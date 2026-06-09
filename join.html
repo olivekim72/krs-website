@@ -22,14 +22,15 @@
 
   <section class="section">
     <div class="container">
-      <!-- 입회신청 폼 — 제출 내용은 FormSubmit.co 를 통해 korea-rose@naver.com 으로 자동 전송됩니다.
-           ※ 최초 1회: 첫 제출 시 korea-rose@naver.com 으로 오는 "Activate Form" 메일의 링크를 눌러야 이후부터 정상 수신됩니다. -->
-      <form id="join-form" class="form-wrap" action="https://formsubmit.co/ajax/korea-rose@naver.com" method="POST">
-        <!-- FormSubmit 설정 (메일 제목/형식/스팸방지) -->
-        <input type="hidden" name="_subject" value="[한국장미회] 새 회원 입회신청">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="_honey" style="display:none">
+      <!-- 입회신청 폼 — 제출 내용은 Web3Forms 를 통해 korea-rose@naver.com 으로 자동 전송됩니다.
+           ※ 작동시키려면 아래 access_key 값에 web3forms.com 에서 발급받은 키를 넣어야 합니다. -->
+      <form id="join-form" class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
+        <!-- ⬇⬇⬇ web3forms.com 에서 korea-rose@naver.com 으로 발급받은 Access Key 를 아래 value 에 붙여넣으세요 ⬇⬇⬇ -->
+        <input type="hidden" name="access_key" value="8338de69-1e4e-4ec9-bf36-d11b6c7d8f93">
+        <input type="hidden" name="subject" value="[한국장미회] 새 회원 입회신청">
+        <input type="hidden" name="from_name" value="한국장미회 홈페이지">
+        <!-- 스팸봇 차단용 honeypot (사람에게는 보이지 않음) -->
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
         <div class="field">
           <label for="f-name">성명 *</label>
@@ -109,7 +110,7 @@
         })
         .then(function (res) { return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; }); })
         .then(function (r) {
-          if (r.ok) {
+          if (r.ok && r.data && r.data.success) {
             document.getElementById("done").style.display = "block";
             form.style.display = "none";
             window.scrollTo({ top: 0, behavior: "smooth" });
