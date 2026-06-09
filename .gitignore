@@ -26,3 +26,6 @@ supabase/.temp/
 supabase/.branches/
 
 .vercel
+
+# 참고용 스크린샷
+images/스크린샷*.png
