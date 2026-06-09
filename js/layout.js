@@ -60,7 +60,7 @@
       '<div class="container">' +
         '<div class="cols">' +
           "<div>" +
-            '<h4 class="footer-brand"><img src="images/logo.png" alt="" class="footer-logo">' +
+            '<h4 class="footer-brand"><img src="images/logo-footer.png" alt="" class="footer-logo">' +
               '<span class="footer-brand-name">한국장미회<small>KOREA ROSE SOCIETY</small></span></h4>' +
             '<p style="opacity:.85;font-size:14px;max-width:300px;">세계장미회(WFRS) 회원 단체.<br>장미 문화의 보급·교육과 국제 교류, 회원 간 배움과 나눔을 이어갑니다.</p>' +
             '<p style="opacity:.9;font-size:14px;margin-top:12px;">📧 <a href="mailto:korea-rose@naver.com" style="display:inline;padding:0;">korea-rose@naver.com</a></p>' +
