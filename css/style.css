@@ -197,7 +197,7 @@ img { max-width: 100%; display: block; }
 .footer h4 { font-family: serif; margin-bottom: 12px; }
 /* 푸터 브랜드 잠금(로고 + 한국장미회 + 영문명) — 헤더 브랜드와 동일한 위계 */
 .footer-brand { display: flex; align-items: center; gap: 10px; }
-.footer-logo { width: 42px; height: 42px; object-fit: contain; flex: 0 0 auto; filter: brightness(0) invert(1); }
+.footer-logo { width: 42px; height: 42px; object-fit: contain; flex: 0 0 auto; }
 .footer-brand-name { font-family: "Nanum Myeongjo", serif; font-size: 19px; font-weight: 700; line-height: 1.2; color: #fff; }
 .footer-brand-name small { display: inline; margin-left: 8px; font-family: "Cormorant Garamond", serif; font-size: 13px; font-weight: 400; letter-spacing: 1px; color: #fff; opacity: 0.85; }
 .footer a { opacity: 0.85; font-size: 14px; display: block; padding: 3px 0; }
