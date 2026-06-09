@@ -27,45 +27,13 @@
       <div class="board-head">
         <div>
           <h2>회원들의 장미 이야기</h2>
-          <p>로그인하면 누구나 사진과 글을 간편하게 올릴 수 있어요.</p>
+          <p>한국장미회 네이버 카페에 올라온 최신 글을 모았습니다. 글쓰기·댓글은 카페에서 함께해요.</p>
         </div>
-        <button id="new-story-btn" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;">✏️ 스토리 올리기</button>
+        <a href="https://cafe.naver.com/korearose" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;">네이버 카페 바로가기 →</a>
       </div>
 
-      <!-- 로그인 안내 -->
-      <div id="auth-notice"></div>
-
-      <!-- 업로드 폼 (기본 숨김) -->
-      <form id="story-form" class="form-wrap" style="display:none;">
-        <div class="field">
-          <label>제목 *</label>
-          <input type="text" name="title" required placeholder="예) 올봄 우리 집 첫 장미가 피었어요">
-        </div>
-        <div class="form-row">
-          <div class="field">
-            <label>카테고리</label>
-            <select name="category"></select>
-          </div>
-        </div>
-        <div class="field">
-          <label>내용 *</label>
-          <textarea name="content" required placeholder="장미를 가꾸며 있었던 이야기를 자유롭게 들려주세요."></textarea>
-        </div>
-        <div class="field">
-          <label>사진 (선택)</label>
-          <input type="file" name="image" accept="image/*" style="display:none;" id="story-image-input">
-          <label for="story-image-input" class="image-drop image-preview">📷 사진을 선택하세요 (클릭)</label>
-        </div>
-        <div style="display:flex; gap:12px;">
-          <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;border:none;cursor:pointer;flex:1;">스토리 올리기</button>
-          <button type="button" class="cancel-btn">취소</button>
-        </div>
-      </form>
-
-      <div id="story-status"></div>
-
-      <!-- 스토리 목록 -->
-      <div class="event-grid" id="story-board"></div>
+      <!-- 네이버 카페 최신글 -->
+      <div class="cafe-list" id="cafe-list"></div>
 
     </div>
   </section>
@@ -77,6 +45,7 @@
   <script src="js/config.js"></script>
   <script src="js/layout.js"></script>
   <script type="module" src="js/auth.js"></script>
-  <script type="module" src="js/stories.js"></script>
+  <script src="js/cafe.js"></script>
+  <script>loadCafePosts("cafe-list", 20);</script>
 </body>
 </html>
