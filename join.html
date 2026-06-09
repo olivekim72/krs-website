@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 입회신청 | 한국장미회</title>
+  <meta name="description" content="한국장미회 회원 입회신청 — 양식을 작성하시면 사무국에서 확인 후 연락드립니다. 장미를 사랑하는 누구나 함께할 수 있습니다.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <div id="site-header"></div>
 
+  <main>
   <section class="hero page-hero photo-hero">
-    <img class="hero-bg" src="images/garden/r53.jpg" alt="">
+    <img class="hero-bg" src="images/garden/r53.jpg" alt="활짝 핀 분홍 장미">
     <div class="container">
       <h1>회원 입회신청서</h1>
       <p>아래 양식을 작성해 주시면 사무국에서 확인 후 연락드립니다.</p>
@@ -20,30 +22,38 @@
 
   <section class="section">
     <div class="container">
-      <form class="form-wrap" onsubmit="event.preventDefault(); document.getElementById('done').style.display='block'; this.style.display='none'; window.scrollTo({top:0,behavior:'smooth'});">
+      <!-- 입회신청 폼 — 제출 내용은 FormSubmit.co 를 통해 korea-rose@naver.com 으로 자동 전송됩니다.
+           ※ 최초 1회: 첫 제출 시 korea-rose@naver.com 으로 오는 "Activate Form" 메일의 링크를 눌러야 이후부터 정상 수신됩니다. -->
+      <form id="join-form" class="form-wrap" action="https://formsubmit.co/ajax/korea-rose@naver.com" method="POST">
+        <!-- FormSubmit 설정 (메일 제목/형식/스팸방지) -->
+        <input type="hidden" name="_subject" value="[한국장미회] 새 회원 입회신청">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+
         <div class="field">
-          <label>성명 *</label>
-          <input type="text" required placeholder="홍길동">
+          <label for="f-name">성명 *</label>
+          <input id="f-name" name="성명" type="text" required placeholder="홍길동">
         </div>
         <div class="field">
-          <label>연락처 *</label>
-          <input type="tel" required placeholder="010-0000-0000">
+          <label for="f-tel">연락처 *</label>
+          <input id="f-tel" name="연락처" type="tel" required placeholder="010-0000-0000">
         </div>
         <div class="field">
-          <label>이메일</label>
-          <input type="email" placeholder="rose@example.com">
+          <label for="f-email">이메일</label>
+          <input id="f-email" name="이메일" type="email" placeholder="rose@example.com">
         </div>
         <div class="field">
-          <label>회원 구분</label>
-          <select>
+          <label for="f-type">회원 구분</label>
+          <select id="f-type" name="회원구분">
             <option>일반회원</option>
             <option>단체회원</option>
             <option>학생회원</option>
           </select>
         </div>
         <div class="field">
-          <label>장미 재배 경력</label>
-          <select>
+          <label for="f-exp">장미 재배 경력</label>
+          <select id="f-exp" name="재배경력">
             <option>입문 (1년 미만)</option>
             <option>초급 (1~3년)</option>
             <option>중급 (3~7년)</option>
@@ -51,8 +61,8 @@
           </select>
         </div>
         <div class="field">
-          <label>관심 분야 / 가입 동기</label>
-          <textarea placeholder="예) 장미 재배에 관심이 많아 전정·관리 실습에 참여하고 싶습니다."></textarea>
+          <label for="f-msg">관심 분야 / 가입 동기</label>
+          <textarea id="f-msg" name="관심분야_가입동기" placeholder="예) 장미 재배에 관심이 많아 전정·관리 실습에 참여하고 싶습니다."></textarea>
         </div>
         <div class="field">
           <label><input type="checkbox" required style="width:auto;"> 개인정보 수집·이용에 동의합니다. *</label>
@@ -60,7 +70,8 @@
         <button type="submit" class="btn btn-primary" style="background:var(--rose-deep);color:#fff;width:100%;border:none;cursor:pointer;font-size:16px;">
           입회신청서 제출하기
         </button>
-        <p class="form-note">* 시안에서는 실제 전송되지 않습니다. 실제 운영 시 사무국 이메일/DB로 자동 접수되도록 연결할 수 있습니다.</p>
+        <p class="form-note" id="form-error" style="display:none; color:#c0392b;"></p>
+        <p class="form-note">제출하신 내용은 한국장미회 사무국(korea-rose@naver.com)으로 안전하게 전달됩니다.</p>
       </form>
 
       <div id="done" style="display:none; text-align:center; max-width:640px; margin:0 auto; background:#fff; padding:50px; border-radius:16px; box-shadow:var(--shadow);">
@@ -71,11 +82,50 @@
       </div>
     </div>
   </section>
+  </main>
 
   <div id="site-footer"></div>
 
   <script src="js/config.js"></script>
   <script src="js/layout.js"></script>
   <script type="module" src="js/auth.js"></script>
+  <script>
+    // 입회신청 폼 제출 — 페이지 이동 없이 FormSubmit 으로 전송하고 성공 화면 표시
+    (function () {
+      var form = document.getElementById("join-form");
+      var errBox = document.getElementById("form-error");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var original = btn ? btn.textContent : "";
+        if (btn) { btn.disabled = true; btn.textContent = "전송 중…"; }
+        if (errBox) errBox.style.display = "none";
+
+        fetch(form.action, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form)
+        })
+        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; }); })
+        .then(function (r) {
+          if (r.ok) {
+            document.getElementById("done").style.display = "block";
+            form.style.display = "none";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            throw new Error((r.data && r.data.message) || "전송에 실패했습니다.");
+          }
+        })
+        .catch(function (err) {
+          if (btn) { btn.disabled = false; btn.textContent = original; }
+          if (errBox) {
+            errBox.textContent = "⚠️ 전송 중 문제가 발생했습니다. 잠시 후 다시 시도하시거나 korea-rose@naver.com 으로 직접 보내주세요. (" + err.message + ")";
+            errBox.style.display = "block";
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

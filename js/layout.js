@@ -46,7 +46,9 @@
         '<button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기">☰</button>' +
         '<ul class="menu" id="nav-menu">' + menu + "</ul>" +
         '<div class="nav-right">' +
-          '<span id="auth-slot" class="auth-slot"><a href="login.html" class="auth-link">로그인</a></span>' +
+          // 로그인 링크는 공개 메뉴에서 제거. (관리자는 login.html 직접 접속)
+          // auth.js 가 로그인 상태일 때만 이 슬롯에 닉네임/로그아웃을 채웁니다.
+          '<span id="auth-slot" class="auth-slot"></span>' +
           '<a href="join.html" class="nav-cta">입회신청</a>' +
         "</div>" +
       "</div>" +
@@ -95,6 +97,44 @@
     fav.href = "images/logo.jpg";
     document.head.appendChild(fav);
   }
+
+  // ===== SEO/소셜 공유 메타 자동 주입 =====
+  // 각 페이지는 <title> 과 <meta name="description"> 만 직접 두면,
+  // 아래 코드가 OG(오픈그래프)·트위터 카드·theme-color 등 공통 메타를 자동으로 채웁니다.
+  (function injectMeta() {
+    const head = document.head;
+    function ensureMeta(attr, key, content) {
+      if (!content) return;
+      let el = head.querySelector("meta[" + attr + '="' + key + '"]');
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        head.appendChild(el);
+      }
+      if (!el.getAttribute("content")) el.setAttribute("content", content);
+    }
+    const SITE = "한국장미회 (Korea Rose Society)";
+    const title = document.title || SITE;
+    const descEl = head.querySelector('meta[name="description"]');
+    const desc = descEl ? descEl.getAttribute("content") : "";
+    // 절대 URL 기준(소셜 미리보기 이미지는 절대경로 권장)
+    const origin = location.origin && location.origin !== "null" ? location.origin : "";
+    const base = origin + location.pathname.replace(/[^/]*$/, "");
+    const ogImage = base + "images/garden/hero.jpg";
+
+    ensureMeta("name", "theme-color", "#A6324F");
+    ensureMeta("property", "og:site_name", SITE);
+    ensureMeta("property", "og:type", "website");
+    ensureMeta("property", "og:title", title);
+    ensureMeta("property", "og:description", desc);
+    ensureMeta("property", "og:image", ogImage);
+    ensureMeta("property", "og:url", origin + location.pathname);
+    ensureMeta("property", "og:locale", "ko_KR");
+    ensureMeta("name", "twitter:card", "summary_large_image");
+    ensureMeta("name", "twitter:title", title);
+    ensureMeta("name", "twitter:description", desc);
+    ensureMeta("name", "twitter:image", ogImage);
+  })();
 
   // 웹폰트 — 우아한 한글 명조(제목) + 고딕(본문) + 라틴 세리프(영문 장식)
   if (!document.getElementById("krs-fonts")) {

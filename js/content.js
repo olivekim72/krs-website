@@ -32,7 +32,7 @@ function attHTML(atts) {
   const items = atts.map(function (a) {
     const isImg = (a.type || "").indexOf("image/") === 0;
     if (isImg)
-      return '<a class="att-img" href="' + esc(a.url) + '" target="_blank" rel="noopener"><img src="' + esc(a.url) + '" alt=""></a>';
+      return '<a class="att-img" href="' + esc(a.url) + '" target="_blank" rel="noopener"><img src="' + esc(a.url) + '" alt="첨부 이미지" loading="lazy"></a>';
     return '<a class="att-file" href="' + esc(a.url) + '" target="_blank" rel="noopener">📄 ' + esc(a.name) + "</a>";
   }).join("");
   return '<div class="att-wrap">' + items + "</div>";

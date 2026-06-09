@@ -17,6 +17,18 @@ function _cafeDate(s) {
   return d.getFullYear() + ". " + (d.getMonth() + 1) + ". " + d.getDate();
 }
 
+// 최신글 우선: 날짜 내림차순 정렬 (날짜 없는 항목은 뒤로)
+function _cafeSortLatest(items) {
+  return items.slice().sort(function (a, b) {
+    const da = a && a.date ? new Date(a.date).getTime() : NaN;
+    const db = b && b.date ? new Date(b.date).getTime() : NaN;
+    if (isNaN(da) && isNaN(db)) return 0;
+    if (isNaN(da)) return 1;
+    if (isNaN(db)) return -1;
+    return db - da;
+  });
+}
+
 function _cafeRender(target, items, cafeUrl) {
   target.innerHTML = items.map(function (p) {
     const link = p.link || cafeUrl;
@@ -44,14 +56,15 @@ async function loadCafePosts(targetId, limit) {
       const res = await fetch(proxy + encodeURIComponent(cfg.CAFE_RSS_URL));
       const text = await res.text();
       const xml = new DOMParser().parseFromString(text, "text/xml");
-      const nodes = Array.prototype.slice.call(xml.querySelectorAll("item")).slice(0, limit);
-      const items = nodes.map(function (it) {
+      const nodes = Array.prototype.slice.call(xml.querySelectorAll("item"));
+      const all = nodes.map(function (it) {
         const get = function (tag) {
           const el = it.querySelector(tag);
           return el ? el.textContent : "";
         };
         return { title: get("title"), link: get("link"), date: get("pubDate") };
       });
+      const items = _cafeSortLatest(all).slice(0, limit);
       if (items.length) { _cafeRender(target, items, cafeUrl); return; }
     } catch (e) {
       // 프록시/RSS 실패 → 폴백
@@ -63,7 +76,7 @@ async function loadCafePosts(targetId, limit) {
     const res = await fetch("data/cafe.json");
     const items = await res.json();
     if (Array.isArray(items) && items.length) {
-      _cafeRender(target, items.slice(0, limit), cafeUrl);
+      _cafeRender(target, _cafeSortLatest(items).slice(0, limit), cafeUrl);
       return;
     }
   } catch (e) { /* fall through */ }

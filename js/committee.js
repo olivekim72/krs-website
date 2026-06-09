@@ -67,7 +67,7 @@ function fmtDate(s) {
       const isImg = (a.type || "").indexOf("image/") === 0;
       if (!url) return '<span class="att-file">📎 ' + esc(a.name) + " (열 수 없음)</span>";
       if (isImg)
-        return '<a href="' + url + '" target="_blank" rel="noopener" class="att-img"><img src="' + url + '" alt="' + esc(a.name) + '"></a>';
+        return '<a href="' + url + '" target="_blank" rel="noopener" class="att-img"><img src="' + url + '" alt="' + esc(a.name) + '" loading="lazy"></a>';
       return '<a href="' + url + '" target="_blank" rel="noopener" class="att-file">📄 ' + esc(a.name) + "</a>";
     }).join("");
     return '<div class="att-wrap">' + items + "</div>";

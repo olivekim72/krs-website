@@ -143,7 +143,9 @@ async function renderAuthSlot() {
       });
     }
   } else {
-    slot.innerHTML = '<a href="login.html" class="auth-link">로그인</a>';
+    // 비로그인(일반 방문자): 공개 메뉴에 로그인 링크를 노출하지 않음.
+    // 관리자는 login.html 에 직접 접속해 로그인합니다.
+    slot.innerHTML = "";
   }
 }
 

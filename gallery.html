@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>사진 갤러리 | 한국장미회</title>
+  <meta name="description" content="한국장미회 활동 사진 갤러리 — 장미정원과 행사, 회원 활동의 순간들을 사진으로 만나보세요.">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <div id="site-header"></div>
+
+  <main>
 
   <section class="hero page-hero photo-hero">
     <img class="hero-bg" src="images/garden/r50.jpg" alt="">
@@ -43,6 +46,8 @@
     </div>
   </div>
 
+  </main>
+
   <div id="site-footer"></div>
 
   <script src="js/config.js"></script>
@@ -64,7 +69,7 @@
 
     function itemHTML(it) {
       const inner = it.image
-        ? '<img src="' + it.image + '" alt="' + it.title + '">'
+        ? '<img src="' + it.image + '" alt="' + it.grade + " - " + it.title + '" loading="lazy">'
         : '<div class="gallery-emoji">' + (it.emoji || "🌹") + "</div>";
       return (
         '<div class="gallery-item" data-emoji="' + (it.emoji || "🌹") +
