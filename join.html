@@ -103,10 +103,14 @@
         if (btn) { btn.disabled = true; btn.textContent = "전송 중…"; }
         if (errBox) errBox.style.display = "none";
 
+        // 한글 항목 이름이 메일에서 깨지지 않도록 JSON(UTF-8)으로 전송
+        var payload = {};
+        new FormData(form).forEach(function (value, key) { payload[key] = value; });
+
         fetch(form.action, {
           method: "POST",
-          headers: { "Accept": "application/json" },
-          body: new FormData(form)
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload)
         })
         .then(function (res) { return res.json().catch(function () { return {}; }).then(function (data) { return { ok: res.ok, data: data }; }); })
         .then(function (r) {
