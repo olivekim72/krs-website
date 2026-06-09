@@ -34,7 +34,7 @@ function _cafeRender(target, items, cafeUrl) {
     const link = p.link || cafeUrl;
     return (
       '<a class="cafe-item" href="' + _cafeEsc(link) + '" target="_blank" rel="noopener">' +
-        '<span class="cafe-badge">NAVER 카페</span>' +
+        '<img class="cafe-logo" src="images/logo.png" alt="한국장미회">' +
         '<span class="cafe-title">' + _cafeEsc(p.title || "(제목 없음)") + "</span>" +
         '<span class="cafe-date">' + _cafeDate(p.date) + " ›</span>" +
       "</a>"
