@@ -584,15 +584,13 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 14px; min-
 .cafe-section { padding: 48px 0; background: #fff; }
 
 /* ===== 하단 CTA (2단: 텍스트 + 사진) ===== */
-.cta-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
-.cta-text {
-  display: flex; align-items: center;
+.cta-band {
   background: linear-gradient(160deg, var(--blush), var(--cream));
-  padding: 60px clamp(28px, 6vw, 88px);
+  padding: clamp(56px, 8vw, 88px) 0;
+  text-align: center;
 }
-.cta-text h2 { font-size: 34px; color: var(--rose-deep); line-height: 1.3; margin-bottom: 16px; }
-.cta-text p { color: var(--gray); font-size: 16px; margin-bottom: 26px; max-width: 420px; }
-.cta-img { background: var(--rose-light) center / cover no-repeat; min-height: 340px; }
+.cta-band h2 { font-size: 34px; color: var(--rose-deep); line-height: 1.3; margin-bottom: 16px; }
+.cta-band p { color: var(--gray); font-size: 16px; margin: 0 auto 26px; max-width: 420px; }
 
 /* ===== 반응형 ===== */
 @media (max-width: 1080px) {
@@ -621,8 +619,6 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 14px; min-
   .work-icons { grid-template-columns: repeat(3, 1fr); gap: 26px 16px; }
   .photo-band { grid-template-columns: repeat(2, 1fr); }
   .photo-band-item { height: 220px; }
-  .cta-split { grid-template-columns: 1fr; }
-  .cta-img { min-height: 280px; order: -1; }
 }
 
 @media (max-width: 640px) {
